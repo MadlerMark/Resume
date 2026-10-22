@@ -1,0 +1,175 @@
+%-------------------------------------------------------------------------------
+% Mark J. Madler -- Resume (Last Updated Fall 2026)
+%-------------------------------------------------------------------------------
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hmargin=0.55in, vmargin=0.45in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{RGB}{0,51,102}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+\raggedright
+
+% Section headings: accent-colored small caps with a rule underneath
+\titleformat{\section}{\color{accent}\large\scshape}{}{0pt}{}%
+  [\vspace{-7pt}{\color{accent}\rule{\textwidth}{0.6pt}}]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+
+% Tight bullet lists
+\setlist[itemize]{leftmargin=1.4em, itemsep=0pt, topsep=0pt, parsep=0pt,
+                  label=\textbullet}
+
+% \entry{Left bold}{Right}{Left italic}{Right italic}
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\textwidth}{X r}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4} \\
+  \end{tabularx}\par\vspace{1pt}%
+}
+
+% \pub{Title}{Venue / status}{Authors}
+\newcommand{\pub}[3]{%
+  \textbf{#1}\par
+  \begin{tabularx}{\textwidth}{X r}
+    {\small #3} & \textit{#2} \\
+  \end{tabularx}\par\vspace{1pt}%
+}
+
+% Bold my name in author lists
+\newcommand{\me}{\textbf{M.~Madler}}
+
+\begin{document}
+
+%----------------------------------- HEADER ------------------------------------
+\begin{center}
+  {\Huge\scshape Mark J. Madler} \\[3pt]
+  Boulder, CO \;$\cdot$\;
+  (928) 925-4570 \;$\cdot$\;
+  \href{mailto:madlermark@gmail.com}{madlermark@gmail.com} \;$\cdot$\;
+  \href{https://github.com/MadlerMark}{github.com/MadlerMark}
+\end{center}
+\vspace{-2pt}
+
+Personable and driven Computer Engineering PhD student researching programming
+models, memory consistency, and verification for RDMA and CXL. Passionate about
+teaching and engineering design.
+
+%---------------------------------- EDUCATION ----------------------------------
+\section{Education}
+
+\begin{tabularx}{\textwidth}{X r}
+  \textbf{University of Colorado Boulder} & Boulder, CO \\
+  \textit{Ph.D., Computer Engineering \textendash{} Advisor: Dr.\ Joseph Izraelevitz}
+    & \textit{Fall 2024 \textendash{} Present} \\
+  \textit{M.S., Computer Engineering} & \textit{GPA: 3.97} \\
+\end{tabularx}\par\vspace{1pt}
+
+\entry{Gonzaga University}{Spokane, WA}
+      {B.S., Computer Engineering}{GPA: 3.66}
+
+%---------------------------------- EXPERIENCE ---------------------------------
+\section{Experience}
+
+\entry{University of Colorado Boulder}{August 2024 \textendash{} Present}
+      {Graduate Research Assistant, CU Architecture Lab}{Boulder, CO}
+\begin{itemize}
+  \item Research RDMA programming models: encapsulation, memory consistency,
+        and formally verified composable libraries.
+\end{itemize}
+
+\entry{Pacific Northwest National Laboratory}{May 2025 \textendash{} March 2026}
+      {Research Intern \textendash{} Mentors: Bruce Palmer, Sayan Ghosh}{}
+\begin{itemize}
+  \item Compared one-sided, two-sided, and collective communication for
+        distributed SpMM on NERSC Perlmutter.
+  \item Built PMPI tracing to isolate how inter-process dependencies
+        propagate performance perturbations between ranks.
+  \item Studied the effects of communication models over CXL interconnects.
+\end{itemize}
+
+\entry{Kaiser Aluminum}{May \textendash{} December 2023}
+      {Automation Engineering Intern}{}
+\begin{itemize}
+  \item Implemented industrial automation systems using Ignition SCADA.
+  \item Diagnosed and fixed a process issue causing metal defects using
+        Allen-Bradley PLCs.
+  \item Managed network solutions on a large-scale OT network using vSphere.
+\end{itemize}
+
+\entry{Canyon AeroConnect}{May \textendash{} August 2022}
+      {Engineering Intern}{}
+\begin{itemize}
+  \item Worked on a team to develop a tool for customizing a radio's
+        functional options.
+  \item Developed an internal tool for capturing and filtering telemetry data
+        from radio systems.
+\end{itemize}
+
+%---------------------------------- TEACHING -----------------------------------
+\section{Teaching}
+
+\entry{ECEN 4313/5313: Concurrent Programming}{Fall 2026}
+      {Teaching Assistant, University of Colorado Boulder}{}
+\begin{itemize}
+  \item Built a parallel autograder that grades the commit at the deadline
+        and automatically computes late days.
+  \item Developed in-class demos on lock and atomic performance and false sharing.
+\end{itemize}
+
+%--------------------------------- PUBLICATIONS --------------------------------
+\section{Publications}
+
+\pub{A Verified High-Performance Composable Object Library for Remote Direct
+     Memory Access}{POPL 2026}
+    {G.~Ambal, G.~Hodgkins, \me, G.~Chockler, B.~Dongol, J.~Izraelevitz,
+     A.~Raad, V.~Vafeiadis}
+
+\pub{LOCURA: Lazy Consistency for RDMA Distributed Shared Memory}
+    {EuroSys 2027 (in prep.)}
+    {\me, G.~Ambal, E.~Karabacak, B.~Palmer, S.~Ghosh, J.~Izraelevitz}
+\begin{itemize}
+  \item RDMA DSM using lazy release consistency and multi-writer cachelines;
+        formally proven correct.
+  \item 1.9$\times$ faster than MPI RMA on Graph500; 3\textendash139$\times$
+        faster than Argo DSM and 1.2\textendash6$\times$ faster than UPC++.
+\end{itemize}
+
+\pub{Understanding Performance Impacts of Communication Models on Sparse Matrix
+     Multiplication}{IEEE CAL (in prep.)}
+    {\me, B.~Palmer, S.~Ghosh, J.~Izraelevitz}
+\begin{itemize}
+  \item Shows one-sided communication wins by decoupling inter-process
+        dependencies, not by curing load imbalance.
+\end{itemize}
+
+\pub{FLAME: Function-Level Analysis and Merging with Embeddings}
+    {CGO 2027 (under review)}
+    {H.~AlGhanim, \me, H.~Malahieude, J.~Izraelevitz}
+\begin{itemize}
+  \item Embedding-guided LLVM function merging: 11.02\% size reduction over
+        \texttt{-Oz} vs.\ 9.06\% for F3M.
+\end{itemize}
+
+%----------------------------------- SKILLS ------------------------------------
+\section{Skills}
+
+\begin{tabularx}{\textwidth}{@{}l@{\hspace{1em}}X@{}}
+  \textbf{Languages:}       & C, C++, Python, C\#, Assembly, MATLAB,
+                              VHDL, Verilog \\
+  \textbf{HPC \& Systems:}  & RDMA, MPI RMA, UPC++, Global Arrays, CXL,
+                              pthreads, LLVM, eBPF, gem5 \\
+  \textbf{Tools:}           & Linux, Git/GitHub, Docker, Make/CMake, \LaTeX,
+                              Slurm, vSphere, Ignition, SolidWorks \\
+\end{tabularx}
+
+\end{document}
